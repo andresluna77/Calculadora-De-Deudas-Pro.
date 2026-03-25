@@ -3,22 +3,27 @@ window.onload = function() {
     if (!guardado) return;
 
     document.getElementById("sueldo").value = guardado.sueldo || "";
-    document.getElementById("tipoIngreso").value = guardado.tipoIngreso || "mensual";
 
     guardado.gastos.forEach(g => {
-        let t = document.getElementById("tablaGastos"), f = t.insertRow();
-        f.insertCell(0).innerHTML = `<input value="${g.nombre}">`;
-        f.insertCell(1).innerHTML = `<input oninput='formatearNumero(this)' value="${g.valor}">`;
+        let t = document.querySelector("#tablaGastos tbody"), f = t.insertRow();
+        let c1 = f.insertCell(0); c1.setAttribute("data-label", "Nombre");
+        c1.innerHTML = `<input value="${g.nombre}">`;
+        let c2 = f.insertCell(1); c2.setAttribute("data-label", "Valor");
+        c2.innerHTML = `<input oninput='formatearNumero(this)' value="${g.valor}">`;
         f.insertCell(2).innerHTML = "<button onclick='this.closest(\"tr\").remove()' style='background:#dc3545'>X</button>";
     });
 
     guardado.deudas.forEach(d => {
-        let t = document.getElementById("tablaDeudas"), f = t.insertRow();
+        let t = document.querySelector("#tablaDeudas tbody"), f = t.insertRow();
         f.className = d.estado ? "pagado" : "";
-        f.insertCell(0).innerHTML = `<input value="${d.nombre}">`;
-        f.insertCell(1).innerHTML = `<input oninput='formatearNumero(this)' value="${d.monto}">`;
-        f.insertCell(2).innerHTML = `<label><input type="checkbox" ${d.estado?'checked':''} onchange="cambiarEstado(this)"><span>${d.estado?'Pagado':'Pendiente'}</span></label>`;
-        f.insertCell(3).innerHTML = `<input oninput='formatearNumero(this)' value="${d.pago}">`;
+        let c1 = f.insertCell(0); c1.setAttribute("data-label", "Nombre");
+        c1.innerHTML = `<input value="${d.nombre}">`;
+        let c2 = f.insertCell(1); c2.setAttribute("data-label", "Monto");
+        c2.innerHTML = `<input oninput='formatearNumero(this)' value="${d.monto}">`;
+        let c3 = f.insertCell(2); c3.setAttribute("data-label", "Estado");
+        c3.innerHTML = `<label><input type="checkbox" ${d.estado?'checked':''} onchange="cambiarEstado(this)"><span>${d.estado?'Pagado':'Pendiente'}</span></label>`;
+        let c4 = f.insertCell(3); c4.setAttribute("data-label", "Pago");
+        c4.innerHTML = `<input oninput='formatearNumero(this)' value="${d.pago}">`;
         f.insertCell(4).innerHTML = "<button onclick='this.closest(\"tr\").remove()' style='background:#dc3545'>X</button>";
     });
 };
@@ -29,18 +34,24 @@ function formatearNumero(input) {
 }
 
 function agregarGasto() {
-    let t = document.getElementById("tablaGastos"), f = t.insertRow();
-    f.insertCell(0).innerHTML = "<input placeholder='Nombre'>";
-    f.insertCell(1).innerHTML = "<input oninput='formatearNumero(this)' placeholder='Valor'>";
+    let t = document.querySelector("#tablaGastos tbody"), f = t.insertRow();
+    let c1 = f.insertCell(0); c1.setAttribute("data-label", "Nombre");
+    c1.innerHTML = "<input placeholder='Ej: Arriendo'>";
+    let c2 = f.insertCell(1); c2.setAttribute("data-label", "Valor");
+    c2.innerHTML = "<input oninput='formatearNumero(this)' placeholder='Valor'>";
     f.insertCell(2).innerHTML = "<button onclick='this.closest(\"tr\").remove()' style='background:#dc3545'>X</button>";
 }
 
 function agregarDeuda() {
-    let t = document.getElementById("tablaDeudas"), f = t.insertRow();
-    f.insertCell(0).innerHTML = "<input placeholder='Deuda'>";
-    f.insertCell(1).innerHTML = "<input oninput='formatearNumero(this)' placeholder='Total'>";
-    f.insertCell(2).innerHTML = `<label><input type="checkbox" onchange="cambiarEstado(this)"><span>Pendiente</span></label>`;
-    f.insertCell(3).innerHTML = "<input oninput='formatearNumero(this)' placeholder='Pago'>";
+    let t = document.querySelector("#tablaDeudas tbody"), f = t.insertRow();
+    let c1 = f.insertCell(0); c1.setAttribute("data-label", "Nombre");
+    c1.innerHTML = "<input placeholder='Ej: Banco'>";
+    let c2 = f.insertCell(1); c2.setAttribute("data-label", "Monto");
+    c2.innerHTML = "<input oninput='formatearNumero(this)' placeholder='Total'>";
+    let c3 = f.insertCell(2); c3.setAttribute("data-label", "Estado");
+    c3.innerHTML = `<label><input type="checkbox" onchange="cambiarEstado(this)"><span>Pendiente</span></label>`;
+    let c4 = f.insertCell(3); c4.setAttribute("data-label", "Pago");
+    c4.innerHTML = "<input oninput='formatearNumero(this)' placeholder='Mínimo'>";
     f.insertCell(4).innerHTML = "<button onclick='this.closest(\"tr\").remove()' style='background:#dc3545'>X</button>";
 }
 
@@ -51,14 +62,11 @@ function cambiarEstado(c) {
 }
 
 function irAResultados() {
-    if(!document.getElementById("sueldo").value) return alert("Ingresa tu sueldo.");
-    let datos = { sueldo: sueldo.value, tipoIngreso: tipoIngreso.value, deudas: [], gastos: [] };
-    document.querySelectorAll("#tablaDeudas tr").forEach((f, i) => {
-        if (i === 0) return;
-        datos.deudas.push({ nombre: f.cells[0].children[0].value, monto: f.cells[1].children[0].value, estado: f.cells[2].children[0].checked, pago: f.cells[3].children[0].value });
+    let datos = { sueldo: sueldo.value, deudas: [], gastos: [] };
+    document.querySelectorAll("#tablaDeudas tbody tr").forEach(f => {
+        datos.deudas.push({ nombre: f.cells[0].children[0].value, monto: f.cells[1].children[0].value, estado: f.cells[2].querySelector("input").checked, pago: f.cells[3].children[0].value });
     });
-    document.querySelectorAll("#tablaGastos tr").forEach((f, i) => {
-        if (i === 0) return;
+    document.querySelectorAll("#tablaGastos tbody tr").forEach(f => {
         datos.gastos.push({ nombre: f.cells[0].children[0].value, valor: f.cells[1].children[0].value });
     });
     localStorage.setItem("datosDeudas", JSON.stringify(datos));

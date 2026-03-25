@@ -1,37 +1,111 @@
-body { font-family: 'Segoe UI', Tahoma, sans-serif; margin: 0; background: #f4f6f9; color: #333; }
+body {
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+    margin: 0;
+    background: #f4f6f9;
+    color: #333;
+}
 
 .contenedor {
     display: flex;
     gap: 20px;
     padding: 20px;
     min-height: 100vh;
-    flex-wrap: wrap; /* Clave para responsive */
+    flex-wrap: wrap;
 }
 
 .columna {
     flex: 1;
-    min-width: 300px; /* Evita que se aplasten en pantallas chicas */
+    min-width: 300px;
     background: white;
     padding: 20px;
     border-radius: 15px;
     box-shadow: 0 4px 15px rgba(0,0,0,0.08);
 }
 
-table { width: 100%; margin-bottom: 15px; border-collapse: collapse; }
-th, td { padding: 10px; text-align: left; border-bottom: 1px solid #eee; }
-input, select { width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #ddd; box-sizing: border-box; font-size: 16px; }
-
-button { 
-    padding: 12px; border-radius: 10px; border: none; cursor: pointer; 
-    background: #007bff; color: white; font-weight: bold; width: 100%; margin-bottom: 5px; 
+table {
+    width: 100%;
+    margin-bottom: 15px;
+    border-collapse: collapse;
 }
 
-.kpi { flex: 1; background: #f8f9fa; padding: 15px; border-radius: 10px; text-align: center; border: 1px solid #e9ecef; min-width: 100px; }
-tr.pagado { text-decoration: line-through; opacity: 0.5; background: #d4edda; }
+th, td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #eee;
+}
 
-/* AJUSTES PARA CELULAR */
+input {
+    width: 100%;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    box-sizing: border-box;
+    font-size: 16px;
+}
+
+button {
+    padding: 12px;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    background: #007bff;
+    color: white;
+    font-weight: bold;
+    width: 100%;
+    margin-bottom: 5px;
+}
+
+tr.pagado {
+    text-decoration: line-through;
+    opacity: 0.6;
+    background: #d4edda;
+}
+
+.kpi {
+    flex: 1;
+    background: #f8f9fa;
+    padding: 15px;
+    border-radius: 10px;
+    text-align: center;
+    min-width: 120px;
+}
+
+/* RESPONSIVE: SOLUCIÓN PARA CELULARES */
 @media (max-width: 768px) {
     .contenedor { flex-direction: column; padding: 10px; }
-    .columna { width: 100%; box-sizing: border-box; }
-    #kpis { flex-direction: column; }
+    
+    table thead { display: none; } /* Oculta encabezados de tabla */
+    
+    table, tbody, tr, td { display: block; width: 100%; }
+
+    tr {
+        border: 1px solid #eee;
+        border-radius: 10px;
+        padding: 10px;
+        margin-bottom: 15px;
+        background: #fff;
+    }
+
+    td {
+        border: none;
+        position: relative;
+        padding-left: 40% !important;
+        margin-bottom: 8px;
+    }
+
+    /* Simula etiquetas para cada campo */
+    td:before {
+        content: attr(data-label);
+        position: absolute;
+        left: 10px;
+        font-weight: bold;
+        color: #666;
+    }
+
+    td:last-child { 
+        padding-left: 0 !important; 
+        text-align: right; 
+        border-top: 1px solid #eee;
+        padding-top: 10px;
+    }
 }
