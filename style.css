@@ -1,0 +1,11 @@
+body { font-family: 'Segoe UI', Tahoma, sans-serif; margin: 0; background: #f4f6f9; color: #333; }
+.contenedor { display: flex; gap: 20px; padding: 20px; min-height: 100vh; flex-wrap: wrap; }
+.columna { flex: 1; min-width: 350px; background: white; padding: 25px; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.08); }
+table { width: 100%; margin-bottom: 15px; border-collapse: collapse; }
+th, td { padding: 10px; text-align: left; border-bottom: 1px solid #eee; }
+input, select { width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #ddd; box-sizing: border-box; }
+button { padding: 12px 20px; border-radius: 10px; border: none; cursor: pointer; color: white; background: #007bff; font-weight: bold; }
+button:hover { opacity: 0.9; }
+.kpi { flex: 1; background: #f8f9fa; padding: 15px; border-radius: 10px; text-align: center; border: 1px solid #e9ecef; }
+.pagado { text-decoration: line-through; opacity: 0.5; background: #d4edda; }
+tr.pagado { text-decoration: line-through; opacity: 0.5; background: #d4edda; }

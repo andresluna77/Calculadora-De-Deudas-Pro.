@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Reporte Financiero</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+</head>
+<body>
+    <div class="contenedor" id="reporte">
+        <div class="columna">
+            <h2>📊 Resumen</h2>
+            <div id="kpis" style="display:flex; gap:10px; margin-bottom:20px;">
+                <div class="kpi"><h3>💰 Disponible</h3><p id="kpiDisponible"></p></div>
+                <div class="kpi"><h3>📉 Deuda</h3><p id="kpiDeuda"></p></div>
+                <div class="kpi"><h3>⚠️ Uso</h3><p id="kpiPorcentaje"></p></div>
+            </div>
+
+            <div style="background: #fff3cd; padding: 15px; border-radius: 10px; margin-bottom: 20px; border-left: 5px solid #ffc107;">
+                <h4>💡 Análisis Personalizado</h4>
+                <p id="mensajeExplicativo"></p>
+                <hr>
+                <p id="consejoFinanciero" style="font-weight: bold; color: #856404;"></p>
+            </div>
+
+            <div style="margin-bottom: 20px;">
+                <h4>🧠 Estrategia:</h4>
+                <label><input type="radio" name="metodo" value="normal" checked onchange="recalcular()"> Normal</label>
+                <label><input type="radio" name="metodo" value="snowball" onchange="recalcular()"> Bola de Nieve</label>
+            </div>
+
+            <div id="resultado"></div>
+            <button onclick="window.location='index.html'" style="background:#6c757d;">← Volver</button>
+            <button id="btnPDF" onclick="generarPDF()" style="background:#007bff; margin-left:10px;">📥 PDF</button>
+        </div>
+
+        <div class="columna">
+            <h2>📈 Proyección</h2>
+            <canvas id="graficoFinanciero"></canvas>
+        </div>
+    </div>
+    <script src="resultados.js"></script>
+</body>
+</html>

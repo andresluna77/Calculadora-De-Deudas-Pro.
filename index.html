@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Deudas Pro</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="contenedor">
+        <div class="columna">
+            <h1>💰 Mi Calculadora Financiera</h1>
+            
+            <h2>Ingresos</h2>
+            <div style="display:flex; gap:10px; margin-bottom:15px;">
+                <select id="tipoIngreso">
+                    <option value="mensual">Mensual</option>
+                    <option value="quincenal">Quincenal</option>
+                </select>
+                <input type="text" id="sueldo" oninput="formatearNumero(this)" placeholder="Monto del pago">
+            </div>
+
+            <h2>Gastos Fijos</h2>
+            <table id="tablaGastos">
+                <tr><th>Nombre</th><th>Valor</th><th></th></tr>
+            </table>
+            <button onclick="agregarGasto()">+ Agregar Gasto</button>
+        </div>
+
+        <div class="columna">
+            <h2>Deudas Actuales</h2>
+            <table id="tablaDeudas">
+                <tr><th>Nombre</th><th>Monto Total</th><th>Estado</th><th>Pago Mínimo</th><th></th></tr>
+            </table>
+            
+            <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:20px;">
+                <button onclick="agregarDeuda()">+ Nueva Deuda</button>
+                <button onclick="irAResultados()" style="background:#28a745;">📊 Ver Proyección</button>
+                <button onclick="limpiarTodo()" style="background:#6c757d;">🗑 Limpiar Datos</button>
+            </div>
+        </div>
+    </div>
+    <script src="app.js"></script>
+</body>
+</html>
