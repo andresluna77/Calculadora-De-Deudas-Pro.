@@ -10,13 +10,17 @@
     <div class="contenedor">
         <div class="columna">
             <h1>💰 Mi Calculadora</h1>
-            <h2>Ingresos</h2>
-            <div style="display:flex; gap:10px; margin-bottom:15px;">
+            <h2>Ingresos y Reserva</h2>
+            <div style="display:flex; gap:10px; margin-bottom:10px;">
                 <select id="tipoIngreso">
                     <option value="mensual">Mensual</option>
                     <option value="quincenal">Quincenal</option>
                 </select>
-                <input type="text" id="sueldo" oninput="formatearNumero(this)" placeholder="Monto">
+                <input type="text" id="sueldo" oninput="formatearNumero(this)" placeholder="Sueldo">
+            </div>
+            <div style="margin-bottom:15px;">
+                <label style="font-size: 0.8em; color: #666;">Reserva mensual (Dinero que NO es para deudas):</label>
+                <input type="text" id="reserva" oninput="formatearNumero(this)" placeholder="Ej: 200.000" style="background: #fff9e6;">
             </div>
 
             <h2>Gastos Fijos</h2>
