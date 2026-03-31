@@ -3,48 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calculadora de Deudas</title>
+    <title>Calculadora de Deudas - Inicio</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="contenedor">
         <div class="columna">
-            <h1>💰 Calculadora de Deudas</h1>
+            <h1>💰 Mi Calculadora</h1>
             <h2>Ingresos</h2>
-            <input type="text" id="sueldo" oninput="formatearNumero(this)" placeholder="Ej: 2.000.000">
+            <div style="display:flex; gap:10px; margin-bottom:15px;">
+                <select id="tipoIngreso">
+                    <option value="mensual">Mensual</option>
+                    <option value="quincenal">Quincenal</option>
+                </select>
+                <input type="text" id="sueldo" oninput="formatearNumero(this)" placeholder="Monto">
+            </div>
 
             <h2>Gastos Fijos</h2>
             <table id="tablaGastos">
-                <thead>
-                    <tr>
-                        <th>Nombre</th>
-                        <th>Valor</th>
-                        <th></th>
-                    </tr>
-                </thead>
+                <thead><tr><th>Nombre</th><th>Valor</th><th></th></tr></thead>
                 <tbody></tbody>
             </table>
-            <button onclick="agregarGasto()">+ Agregar gasto</button>
+            <button onclick="agregarGasto()">+ Agregar Gasto</button>
         </div>
 
         <div class="columna">
             <h2>Deudas Actuales</h2>
             <table id="tablaDeudas">
-                <thead>
-                    <tr>
-                        <th>Nombre</th>
-                        <th>Monto</th>
-                        <th>Estado</th>
-                        <th>Pago mínimo</th>
-                        <th></th>
-                    </tr>
-                </thead>
+                <thead><tr><th>Nombre</th><th>Monto</th><th>Estado</th><th>Pago</th><th></th></tr></thead>
                 <tbody></tbody>
             </table>
-
             <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:20px;">
                 <button onclick="agregarDeuda()">+ Deuda</button>
-                <button onclick="irAResultados()" style="background:#28a745;">📊 Ver resultados</button>
+                <button onclick="irAResultados()" style="background:#28a745;">📊 Ver Resultados</button>
                 <button onclick="limpiarTodo()" style="background:#6c757d;">🗑 Limpiar</button>
             </div>
         </div>
