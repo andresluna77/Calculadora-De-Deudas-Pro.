@@ -10,17 +10,19 @@
     <div class="contenedor">
         <div class="columna">
             <h1>💰 Mi Calculadora</h1>
-            <h2>Ingresos y Reserva</h2>
+            <h2>Ingresos y Plan de Abono</h2>
             <div style="display:flex; gap:10px; margin-bottom:10px;">
                 <select id="tipoIngreso">
                     <option value="mensual">Mensual</option>
                     <option value="quincenal">Quincenal</option>
                 </select>
-                <input type="text" id="sueldo" oninput="formatearNumero(this)" placeholder="Sueldo">
+                <input type="text" id="sueldo" oninput="formatearNumero(this)" placeholder="Sueldo Neto">
             </div>
-            <div style="margin-bottom:15px;">
-                <label style="font-size: 0.8em; color: #666;">Reserva mensual (Dinero que NO es para deudas):</label>
-                <input type="text" id="reserva" oninput="formatearNumero(this)" placeholder="Ej: 200.000" style="background: #fff9e6;">
+            
+            <div style="margin-bottom:15px; background: #e7f3ff; padding: 15px; border-radius: 10px;">
+                <label style="font-weight: bold; display: block; margin-bottom: 5px;">💸 Abono Extra Mensual (Manual):</label>
+                <input type="text" id="abonoVoluntario" oninput="formatearNumero(this)" placeholder="Ej: 100.000" style="border: 2px solid #007bff;">
+                <small style="color: #555;">Este monto es el único que se sumará extra a tus deudas.</small>
             </div>
 
             <h2>Gastos Fijos</h2>
@@ -34,13 +36,13 @@
         <div class="columna">
             <h2>Deudas Actuales</h2>
             <table id="tablaDeudas">
-                <thead><tr><th>Nombre</th><th>Monto</th><th>Estado</th><th>Pago</th><th></th></tr></thead>
+                <thead><tr><th>Nombre</th><th>Monto</th><th>Estado</th><th>Mínimo</th><th></th></tr></thead>
                 <tbody></tbody>
             </table>
             <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:20px;">
                 <button onclick="agregarDeuda()">+ Deuda</button>
-                <button onclick="irAResultados()" style="background:#28a745;">📊 Ver Resultados</button>
-                <button onclick="limpiarTodo()" style="background:#6c757d;">🗑 Limpiar</button>
+                <button onclick="irAResultados()" style="background:#28a745;">📊 Calcular Plan</button>
+                <button onclick="limpiarTodo()" style="background:#6c757d;">🗑 Limpiar Todo</button>
             </div>
         </div>
     </div>
