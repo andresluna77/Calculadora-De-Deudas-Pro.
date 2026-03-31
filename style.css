@@ -1,20 +1,190 @@
-body { font-family: 'Segoe UI', sans-serif; background: #f4f6f9; margin: 0; padding: 0; }
-.contenedor { display: flex; gap: 20px; padding: 20px; flex-wrap: wrap; max-width: 1200px; margin: auto; }
-.columna { flex: 1; min-width: 320px; background: white; padding: 25px; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
-h1, h2 { color: #333; margin-top: 0; }
-input, select { width: 100%; padding: 12px; border-radius: 8px; border: 1px solid #ddd; margin-bottom: 10px; box-sizing: border-box; }
-button { padding: 12px; border-radius: 8px; border: none; color: white; cursor: pointer; width: 100%; font-weight: bold; transition: 0.3s; }
-button:hover { opacity: 0.8; }
-.kpi { flex: 1; background: #f8f9fa; padding: 15px; border-radius: 10px; text-align: center; border: 1px solid #eee; min-width: 100px; }
-.kpi h3 { font-size: 0.8em; color: #666; margin: 0; }
-.kpi p { font-size: 1.2em; font-weight: bold; margin: 5px 0 0; color: #007bff; }
-.alerta { padding: 15px; border-radius: 10px; margin-bottom: 20px; font-size: 0.9em; border-left: 5px solid; }
-.alerta-roja { background: #f8d7da; border-color: #dc3545; color: #721c24; }
-.alerta-verde { background: #d4edda; border-color: #28a745; color: #155724; }
-.tabla-detalle { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 0.85em; }
-.tabla-detalle th { background: #333; color: white; padding: 10px; }
-.tabla-detalle td { padding: 10px; border-bottom: 1px solid #eee; text-align: center; }
+/* --- CONFIGURACIÓN GENERAL --- */
+body { 
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; 
+    background-color: #f4f6f9; 
+    margin: 0; 
+    padding: 0; 
+    color: #333;
+}
 
+.contenedor { 
+    display: flex; 
+    gap: 20px; 
+    padding: 20px; 
+    flex-wrap: wrap; 
+    max-width: 1200px; 
+    margin: auto; 
+}
+
+.columna { 
+    flex: 1; 
+    min-width: 320px; 
+    background: white; 
+    padding: 25px; 
+    border-radius: 15px; 
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1); 
+}
+
+h1, h2 { 
+    color: #2c3e50; 
+    margin-top: 0; 
+    border-bottom: 2px solid #eee;
+    padding-bottom: 10px;
+}
+
+/* --- FORMULARIOS --- */
+input, select { 
+    width: 100%; 
+    padding: 12px; 
+    border-radius: 8px; 
+    border: 1px solid #ddd; 
+    margin-bottom: 10px; 
+    box-sizing: border-box; 
+    font-size: 1rem;
+}
+
+input:focus {
+    border-color: #007bff;
+    outline: none;
+    box-shadow: 0 0 5px rgba(0,123,255,0.2);
+}
+
+/* --- BOTONES (CORRECCIÓN COLOR AZUL) --- */
+button { 
+    display: block;
+    width: 100%;
+    padding: 12px; 
+    border-radius: 8px; 
+    border: none; 
+    color: white !important; /* Asegura que el texto siempre sea blanco */
+    background-color: #007bff; /* AZUL PRINCIPAL */
+    cursor: pointer; 
+    font-weight: bold; 
+    font-size: 1rem;
+    transition: all 0.3s ease; 
+    margin-top: 10px;
+}
+
+button:hover { 
+    background-color: #0056b3; 
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+
+/* Botones específicos por función */
+button[onclick="irAResultados()"] {
+    background-color: #28a745; /* Verde para calcular */
+}
+
+button[onclick="irAResultados()"]:hover {
+    background-color: #218838;
+}
+
+button[onclick="limpiarTodo()"], button[onclick="window.location='index.html'"] {
+    background-color: #6c757d; /* Gris para volver o limpiar */
+}
+
+button[onclick="exportarPDF()"] {
+    background-color: #17a2b8; /* Cyan para el PDF */
+}
+
+/* Botones de eliminar (X) dentro de las tablas */
+td button {
+    background-color: #dc3545 !important;
+    width: auto !important;
+    padding: 5px 12px !important;
+    margin: 0 !important;
+    font-size: 0.8rem;
+}
+
+/* --- TABLAS --- */
+table { 
+    width: 100%; 
+    border-collapse: collapse; 
+    margin-bottom: 15px;
+}
+
+th { 
+    text-align: left; 
+    font-size: 0.9rem; 
+    color: #666; 
+    padding: 10px 5px;
+}
+
+.tabla-detalle { 
+    font-size: 0.85em; 
+}
+
+.tabla-detalle th { 
+    background: #343a40; 
+    color: white; 
+    padding: 12px; 
+}
+
+.tabla-detalle td { 
+    padding: 10px; 
+    border-bottom: 1px solid #eee; 
+    text-align: center; 
+}
+
+/* --- INDICADORES (KPIs) --- */
+.kpi { 
+    flex: 1; 
+    background: #f8f9fa; 
+    padding: 15px; 
+    border-radius: 12px; 
+    text-align: center; 
+    border: 1px solid #e9ecef; 
+    min-width: 100px; 
+}
+
+.kpi h3 { 
+    font-size: 0.75rem; 
+    text-transform: uppercase; 
+    color: #6c757d; 
+    margin: 0; 
+}
+
+.kpi p { 
+    font-size: 1.2rem; 
+    font-weight: bold; 
+    margin: 5px 0 0; 
+    color: #007bff; 
+}
+
+/* --- ALERTAS --- */
+.alerta { 
+    padding: 15px; 
+    border-radius: 10px; 
+    margin-bottom: 20px; 
+    font-size: 0.9rem; 
+    border-left: 5px solid; 
+}
+
+.alerta-roja { 
+    background: #f8d7da; 
+    border-color: #dc3545; 
+    color: #721c24; 
+}
+
+.alerta-verde { 
+    background: #d4edda; 
+    border-color: #28a745; 
+    color: #155724; 
+}
+
+.alerta-naranja {
+    background: #fff3cd;
+    border-color: #ffc107;
+    color: #856404;
+}
+
+/* --- RESPONSIVO Y PDF --- */
 @media (max-width: 768px) {
-    .contenedor { flex-direction: column; }
+    .contenedor { flex-direction: column; padding: 10px; }
+    .columna { min-width: 100%; }
+}
+
+/* Clase para ocultar elementos durante la exportación a PDF */
+.ocultar-pdf {
+    display: none !important;
 }
